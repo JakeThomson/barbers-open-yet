@@ -9,6 +9,8 @@ account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 poll_interval = (15 * 60)
+from_number = os.environ['TWILIO_FROM_NUMBER']
+to_number = os.environ['TWILIO_TO_NUMBER']
 count = 0
 
 while True:
@@ -20,8 +22,8 @@ while True:
         message = client.messages \
             .create(
                 body='Error in application.',
-                from_=os.environ['TWILIO_FROM_NUMBER'],
-                to=os.environ['TWILIO_TO_NUMBER']
+                from_=from_number,
+                to=to_number
             )
         print(f"[{dt.datetime.strftime(dt.datetime.now(), '%d/%m/%Y %H:%M', )}] poll #{count} - ERROR POLLING")
         time.sleep(poll_interval * 2)
@@ -33,8 +35,8 @@ while True:
         message = client.messages \
             .create(
                 body='THE BARBERS ARE OPEN!!! - https://ttbbrighton.resurva.com/',
-                from_=os.environ['TWILIO_FROM_NUMBER'],
-                to=os.environ['TWILIO_TO_NUMBER']
+                from_=from_number,
+                to=to_number
             )
         print(f"[{dt.datetime.strftime(dt.datetime.now(), '%d/%m/%Y %H:%M', )}] poll #{count} - ONLINE!!!")
 
@@ -48,8 +50,8 @@ while True:
         message = client.messages \
             .create(
                 body='THE BARBERS ARE OPEN!!! - https://ttbbrighton.resurva.com/',
-                from_=os.environ['TWILIO_FROM_NUMBER'],
-                to=os.environ['TWILIO_TO_NUMBER']
+                from_=from_number,
+                to=to_number
             )
         print(f"[{dt.datetime.strftime(dt.datetime.now(), '%d/%m/%Y %H:%M', )}] poll #{count} - ONLINE!!!")
         break
